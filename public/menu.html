@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurant - Menu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: #333;
+    }
+
+    .menu, .cart, .order-section {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .menu-search {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #searchInput {
+      padding: 10px;
+      width: 60%;
+      font-size: 16px;
+    }
+
+    .menu-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .menu-item {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .menu-item img {
+      width: 100%;
+      border-radius: 10px;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .menu-item h3 {
+      margin: 10px 0 5px;
+    }
+
+    .price {
+      color: green;
+      font-weight: bold;
+    }
+
+    .increment-decrement {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      gap: 10px;
+    }
+
+    .increment-decrement button {
+      padding: 5px 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .add-to-cart-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      margin-top: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .cart-items {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .remove-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #totalAmount {
+      text-align: right;
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .order-section button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      margin-top: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .order-success-message {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d0e9c6;
+  padding: 30px;
+  max-width: 600px;
+  margin: 30px auto;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.order-success-message h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.order-success-message p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+
+    /* Modal Style */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 40px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content h3 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #2ecc71;
+    }
+
+    .modal-content p {
+      font-size: 18px;
+      color: #333;
+      margin: 10px 0;
+    }
+
+    .modal-content .order-summary {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+    }
+
+    .modal-content .order-summary p {
+      margin: 5px 0;
+    }
+
+    .close-btn {
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .close-btn:hover {
+      background-color: #27ae60;
+    }
+
+    .modal .order-summary {
+      font-size: 16px;
+      text-align: left;
+    }
+
+    .modal-content button:focus,
+    .modal-content button:hover {
+      background-color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu Section -->
+  <section class="menu">
+    <h2>Our Specialities</h2>
+    <div class="menu-search">
+      <input type="text" id="searchInput" placeholder="Search for dishes..." onkeyup="filterMenu()" />
+    </div>
+
+    <div class="menu-items" id="menuItems">
+      <div class="menu-item" data-id="1" data-price="150">
+        <img src="https://i.pinimg.com/236x/ad/82/36/ad82368d7d2c7a5a7ac5ff98e9eacbea.jpg" alt="Fried Rice" />
+        <h3>Fried Rice</h3>
+        <p class="price">₹750</p>
+        <div class="increment-decrement">
+          <button onclick="decreaseQuantity(1)">-</button>
+          <span id="quantity-1">0</span>
+          <button onclick="increaseQuantity(1)">+</button>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart(1, 'Fried Rice', 750)">Add to Cart</button>
+      </div>
+      <div class="menu-item" data-id="2" data-price="350">
+        <img src="https://i.pinimg.com/474x/57/58/8b/57588b32c55b721df9710bfe1093fe1f.jpg" alt="Biryani" />
+        <h3>Biryani</h3>
+        <p class="price">₹350</p>
+        <div class="increment-decrement">
+          <button onclick="decreaseQuantity(1)">-</button>
+          <span id="quantity-2">0</span>
+          <button onclick="increaseQuantity(1)">+</button>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart(2, 'Biryani', 350)">Add to Cart</button>
+      </div>
+      <div class="menu-item" data-id="3" data-price="150">
+        <img src="https://i.pinimg.com/236x/69/4a/74/694a74250ae723c15917a9eec5dd8974.jpg" alt="Chocolate Cake" />
+        <h3>Chocolate Cake</h3>
+        <p class="price">₹150</p>
+        <div class="increment-decrement">
+          <button onclick="decreaseQuantity(1)">-</button>
+          <span id="quantity-3">0</span>
+          <button onclick="increaseQuantity(1)">+</button>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart(3, 'Chocolate Cake', 150)">Add to Cart</button>
+      </div>
+      <div class="menu-item" data-id="4" data-price="300">
+        <img src="https://i.pinimg.com/474x/3e/c9/fe/3ec9fe32c6217014789b5f42e2343f47.jpg" alt="Pizza" />
+        <h3>Pizza</h3>
+        <p class="price">₹300</p>
+        <div class="increment-decrement">
+          <button onclick="decreaseQuantity(1)">-</button>
+          <span id="quantity-4">0</span>
+          <button onclick="increaseQuantity(1)">+</button>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart(4, 'Pizza', 300)">Add to Cart</button>
+      </div>
+      <div class="menu-item" data-id="5" data-price="200">
+        <img src="https://i.pinimg.com/236x/eb/cb/c6/ebcbc6aaa9deca9d6efc1efc93b66945.jpg" alt="Burger" />
+        <h3>Burger</h3>
+        <p class="price">₹200</p>
+        <div class="increment-decrement">
+          <button onclick="decreaseQuantity(1)">-</button>
+          <span id="quantity-5">0</span>
+          <button onclick="increaseQuantity(1)">+</button>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart(5, 'Burger', 200)">Add to Cart</button>
+      </div>
+      <!-- Add more items here with different ids -->
+    </div>
+  </section>
+
+  <!-- Cart Section -->
+  <section class="cart">
+    <h3>Your Cart</h3>
+    <ul class="cart-items" id="cartItems"></ul>
+    <div id="totalAmount"></div>
+    <button class="order-section" onclick="showOrderModal()">Place Order</button>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <h3>Your Order Summary</h3>
+      <div class="order-summary" id="orderSummary"></div>
+      <textarea placeholder="Enter your delivery address..." id="address" rows="4"></textarea>
+      <button onclick="submitOrder()">Submit Order</button>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    let cart = [];
+  
+    function increaseQuantity(id) {
+      const quantityElement = document.getElementById(`quantity-${id}`);
+      quantityElement.textContent = parseInt(quantityElement.textContent) + 1;
+    }
+  
+    function decreaseQuantity(id) {
+      const quantityElement = document.getElementById(`quantity-${id}`);
+      let quantity = parseInt(quantityElement.textContent);
+      if (quantity > 0) {
+        quantityElement.textContent = quantity - 1;
+      }
+    }
+  
+    function addToCart(id, name, price) {
+      const quantity = parseInt(document.getElementById(`quantity-${id}`).textContent);
+      if (quantity === 0) {
+        alert("Please select at least one quantity!");
+        return;
+      }
+  
+      const existingItem = cart.find(item => item.id === id);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cart.push({ id, name, price, quantity });
+      }
+  
+      document.getElementById(`quantity-${id}`).textContent = 0;
+      updateCartUI();
+    }
+  
+    function updateCartUI() {
+      const cartItemsContainer = document.getElementById("cartItems");
+      cartItemsContainer.innerHTML = "";
+  
+      let total = 0;
+  
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = "cart-item";
+        li.innerHTML = `
+          ${item.name} x ${item.quantity} - ₹${item.price * item.quantity}
+          <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartItemsContainer.appendChild(li);
+  
+        total += item.price * item.quantity;
+      });
+  
+      document.getElementById("totalAmount").textContent = total > 0 ? `Total: ₹${total}` : "";
+    }
+  
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+  
+    function showOrderModal() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+  
+      const orderSummary = document.getElementById("orderSummary");
+      orderSummary.innerHTML = "";
+      let total = 0;
+  
+      cart.forEach(item => {
+        const p = document.createElement("p");
+        p.textContent = `${item.name} x ${item.quantity} = ₹${item.price * item.quantity}`;
+        orderSummary.appendChild(p);
+        total += item.price * item.quantity;
+      });
+  
+      const totalP = document.createElement("p");
+      totalP.innerHTML = `<strong>Total: ₹${total}</strong>`;
+      orderSummary.appendChild(totalP);
+  
+      document.getElementById("orderModal").style.display = "block";
+    }
+  
+    function closeModal() {
+      document.getElementById("orderModal").style.display = "none";
+    }
+  
+    function submitOrder() {
+  const address = document.getElementById("address").value.trim();
+  if (address === "") {
+    alert("Please enter a delivery address.");
+    return;
+  }
+
+  const orderId = "ORD" + Math.floor(100000 + Math.random() * 900000); // Random 6-digit order ID
+
+  // Clear cart
+  cart = [];
+  document.getElementById("cartItems").innerHTML = "";
+  document.getElementById("totalAmount").textContent = "";
+  document.querySelectorAll("[id^='quantity-']").forEach(span => span.textContent = "0");
+
+  // Hide modal
+  closeModal();
+
+  // Show success message
+  const successDiv = document.getElementById("orderSuccessMessage");
+  document.getElementById("orderIdDisplay").textContent = `Order ID: #${orderId}`;
+  successDiv.style.display = "block";
+
+  // Optionally scroll to success message
+  successDiv.scrollIntoView({ behavior: "smooth" });
+}
+  
+    function filterMenu() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const menuItems = document.querySelectorAll(".menu-item");
+  
+      menuItems.forEach(item => {
+        const name = item.querySelector("h3").textContent.toLowerCase();
+        item.style.display = name.includes(input) ? "block" : "none";
+      });
+    }
+  </script>
+  <div class="order-success-message" id="orderSuccessMessage" style="display: none;">
+    <h2>🎉 Order Placed Successfully!</h2>
+    <p id="orderIdDisplay">Order ID: #</p>
+    <p>Thank you for ordering with us. Your food will be delivered soon!</p>
+  </div>
+  
+</body>
+</html>

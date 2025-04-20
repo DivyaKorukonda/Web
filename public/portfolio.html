@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divyasree | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --light-bg: #f5f7fa;
+      --light-text: #1f1f1f;
+      --dark-bg: #111827;
+      --dark-text: #f5f5f5;
+      --accent: #4f46e5;
+      --card-bg: #ffffff;
+      --card-dark: #1e293b;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: var(--light-bg);
+      color: var(--light-text);
+      transition: all 0.3s ease;
+    }
+
+    header {
+      background: linear-gradient(90deg, #4f46e5, #3b82f6);
+      color: white;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      background-color: #e0e7ff;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1e3a8a;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    section {
+      padding: 3rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    ul li {
+      margin: 0.5rem 0;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      background: linear-gradient(90deg, #4f46e5, #3b82f6);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    .dark-mode nav {
+      background-color: #1e293b;
+    }
+
+    .dark-mode nav a {
+      color: #cbd5e1;
+    }
+
+    .dark-mode .card {
+      background-color: var(--card-dark);
+      color: white;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 1000;
+      font-weight: 500;
+    }
+
+    a {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+  <header>
+    <h1>Divyasree</h1>
+    <p>CSE | AI & ML | Developer | Tech Enthusiast</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="card">
+      <p>I’m a 3rd year CSE student from ANITS, passionate about AI, full-stack web development, and creating impactful solutions through technology. I enjoy contributing to NGOs and reading self-growth books in my free time.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="card">
+      <ul>
+        <li><strong>Languages:</strong> C, C++, Java, Python, SQL, PHP</li>
+        <li><strong>Web:</strong> HTML, CSS, JavaScript, MERN Stack</li>
+        <li><strong>Database:</strong> MySQL, MongoDB</li>
+        <li><strong>Tools:</strong> Git, Node.js</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="card">
+      <h3>EcoTreasure</h3>
+      <p>A social platform for creators to share sustainable waste-to-useful projects. Features user login, post sharing, likes, and comments.</p>
+    </div>
+    <div class="card">
+      <h3>Attendance & Marks Management</h3>
+      <p>Web-based solution for student-teacher interaction including attendance tracking and academic score display.</p>
+    </div>
+    <div class="card">
+      <h3>Academic Transcript Viewer</h3>
+      <p>Online portal for students to access academic history, certifications, and skills.</p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="card">
+      <h4>Tecnics Integration Technologies</h4>
+      <p>6-month internship contributing to real-time industrial projects using multiple tech stacks.</p>
+    </div>
+    <div class="card">
+      <h4>Edumoon</h4>
+      <p>Learned and implemented MERN Stack technologies in a hands-on internship.</p>
+    </div>
+    <div class="card">
+      <h4>AWS Cloud Computing Workshop</h4>
+      <p>1-week workshop covering cloud basics and hands-on tasks.</p>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <h2>Certifications & Achievements</h2>
+    <div class="card">
+      <p>NPTEL Elite Certificate (64%)</p>
+      <p>Member – ISTE Club, Street Cause NGO, SC PAW</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="card">
+      <p>Email: [your-email@example.com]</p>
+      <p>LinkedIn: <a href="#">Your LinkedIn</a></p>
+      <p>GitHub: <a href="#">Your GitHub</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Divyasree. Built with 💻 and passion.</p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
+</body>
+</html>

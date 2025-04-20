@@ -1,0 +1,259 @@
+INDEX.HTML
+<!DOCTYPE html>
+<head>
+<title>Art Day Registration</title>
+<style>
+body {
+font-family: 'Arial', sans-serif;
+margin: 0;
+padding: 0;
+background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+
+color: #333;
+background-image:
+url('https://i.pinimg.com/736x/78/97/a1/7897a1f0d3f9cabe689960fc194374e4.jpg');
+background-size: cover;
+background-attachment: fixed;
+}
+header {
+background: rgba(255, 255, 255, 0.7);
+color: white;
+text-align: center;
+padding: 1px;
+}
+header h1 {
+margin: 0;
+font-size: 2.8rem;
+letter-spacing: 2px;
+font-family: 'Roboto', sans-serif;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+color: #04503d;
+}
+header p {
+font-size: 1.5rem;
+margin-top: 10px;
+font-family: 'Montserrat', sans-serif;
+font-weight: 500;
+letter-spacing: 1px;
+
+text-shadow: 1px 1px 3px rgba(241, 210, 210, 0.3);
+color: #278559;
+font-family: cursive;
+}
+main {
+padding: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 80vh;
+}
+.form-section {
+background: rgba(255, 255, 255, 0.9);
+padding: 20px;
+border-radius: 20px;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+max-width: 500px;
+width: 100%;
+animation: fadeIn 1s ease-in-out;
+}
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(30px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.form-section h2 {
+
+text-align: center;
+margin-bottom: 20px;
+color: #5a9691;
+font-size: 2rem;
+font-family: 'Roboto', sans-serif;
+}
+form label {
+display: block;
+margin-bottom: 10px;
+font-weight: bold;
+color: #333;
+font-size: 1.1rem;
+}
+form input, form select, form textarea {
+width: 90%;
+padding: 12px;
+margin-bottom: 20px;
+border: 2px solid #ccc;
+border-radius: 8px;
+font-size: 1rem;
+transition: all 0.3s ease-in-out;
+}
+form button {
+background: linear-gradient(45deg, #36d1dc, #5b86e5);
+color: white;
+
+border: none;
+padding: 12px 24px;
+border-radius: 12px;
+font-size: 1.2rem;
+cursor: pointer;
+transition: background 0.3s, transform 0.2s;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+form button:hover {
+background: linear-gradient(45deg, #5b86e5, #36d1dc);
+transform: scale(1.05);
+}
+footer {
+text-align: center;
+padding: 10px 0;
+background: #333;
+color: white;
+font-size: 0.9rem;
+}
+</style>
+</head>
+<body>
+<header>
+<h1>Art Day 2025</h1>
+<p>Unleash your creativity and showcase your talent!</p>
+
+</header>
+<main>
+<section class="form-section">
+<h2>Registration Form</h2>
+<form id="registration-form" method="POST" action="submit.php">
+<label for="name">Full Name</label>
+<input type="text" id="name" name="name" placeholder="Enter your full
+name" required>
+<label for="email">Email</label>
+<input type="email" id="email" name="email" placeholder="Enter your
+email" required>
+<label for="phone">Phone Number</label>
+<input type="tel" id="phone" name="phone" placeholder="Enter your
+phone number" required>
+<label for="dob">Date of Birth</label>
+<input type="date" id="dob" name="dob" required>
+<label for="category">Category</label>
+<select id="category" name="category" required>
+<option value="" disabled selected>Select a category</option>
+<option value="painting">Painting</option>
+<option value="sculpture">Sculpture</option>
+<option value="photography">Photography</option>
+<option value="digital-art">Digital Art</option>
+<option value="crafting">Crafting</option>
+</select>
+<label for="experience">Years of Experience</label>
+<select id="experience" name="experience" required>
+
+<option value="" disabled selected>Select your experience
+
+level</option>
+
+<option value="beginner">Beginner</option>
+<option value="intermediate">Intermediate</option>
+<option value="advanced">Advanced</option>
+</select>
+<label for="message">Why do you want to participate?</label>
+<textarea id="message" name="message" rows="4" placeholder="Share
+your thoughts..."></textarea>
+<label for="file">Upload Your Portfolio (Optional)</label>
+<input type="file" id="file" name="file" accept=".jpg,.jpeg,.png,.pdf">
+<center><button type="submit">Register</button></center>
+</form>
+</section>
+</main>
+<footer>
+<p>&copy; 2025 Art Day Committee. All Rights Reserved.</p>
+</footer>
+</body>
+</html>
+SUBMIT.PHP
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// Retrieve the submitted data from the form
+$name = $_POST['name'];
+$email = $_POST['email'];
+
+$phone = $_POST['phone'];
+$dob = $_POST['dob'];
+$category = $_POST['category'];
+$experience = $_POST['experience'];
+$message = $_POST['message'];
+$file = $_FILES['file']['name']; // file name, you can process the file if needed
+
+echo "<!DOCTYPE html>
+<head>
+<title>Registration Details</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 20px;
+background: #f1f1f1;
+}
+h1 {
+color: #333;
+}
+.detail {
+background-color: #fff;
+padding: 15px;
+margin: 10px 0;
+border-radius: 8px;
+
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.detail h2 {
+color: #007bff;
+}
+.detail p {
+font-size: 1.1rem;
+margin: 5px 0;
+}
+</style>
+</head>
+<body>
+<h1>Art Day 2025 - Registration Details</h1>
+
+<div class='detail'>
+<h2>Full Name:</h2>
+<p>" . htmlspecialchars($name) . "</p>
+</div>
+
+<div class='detail'>
+<h2>Email:</h2>
+<p>" . htmlspecialchars($email) . "</p>
+</div>
+
+<div class='detail'>
+
+<h2>Phone Number:</h2>
+<p>" . htmlspecialchars($phone) . "</p>
+</div>
+
+<div class='detail'>
+<h2>Date of Birth:</h2>
+<p>" . htmlspecialchars($dob) . "</p>
+</div>
+
+<div class='detail'>
+<h2>Category:</h2>
+<p>" . htmlspecialchars($category) . "</p>
+</div>
+
+<div class='detail'>
+<h2>Experience Level:</h2>
+<p>" . htmlspecialchars($experience) . "</p>
+</div>
+
+<div class='detail'>
+<h2>Why do you want to participate?</h2>
+<p>" . nl2br(htmlspecialchars($message)) . "</p>
+</div>
+
+<div class='detail'>
+
+<h2>Portfolio Upload:</h2>
+<p>" . ($file ? "File uploaded: " . htmlspecialchars($file) : "No file
+uploaded.") . "</p>
+</div>
+</body>
+</html>";
+}
+?>

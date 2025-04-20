@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant - Discover Our Flavors</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Section */
+        header {
+            background-color: #2d2d2d;
+            color: white;
+            padding: 5px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            height: 150px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            color: #d60f30; /* Turquoise */
+            margin-bottom: 10px;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        nav ul li {
+            font-size: 1.3rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 15px;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: #d60f30; /* Turquoise */
+            color: black;
+        }
+
+        /* Hero Section with Background Image */
+        .hero {
+            background: url('https://i.pinimg.com/736x/ee/43/df/ee43df70de3c21de25ff6d7c11577f17.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 150px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .cta-button {
+            background-color: #d60f30;
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            border-radius: 25px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #d60f30;
+            transform: scale(1.05);
+        }
+
+        /* Menu Section */
+        .menu {
+            background-color: #ffffff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .menu h2 {
+            font-size: 2.5rem;
+            color: #2d2d2d;
+            margin-bottom: 30px;
+        }
+
+        .menu-items {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .menu-item {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 12px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .menu-item h3 {
+            font-size: 1.6rem;
+            color: #2d2d2d;
+            margin-bottom: 10px;
+        }
+
+        .menu-item p {
+            color: #666;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: #f5f5f5;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            font-size: 2.5rem;
+            color: #2d2d2d;
+            margin-bottom: 30px;
+        }
+
+        .testimonial {
+            margin-bottom: 30px;
+        }
+
+        .testimonial p {
+            font-size: 1.2rem;
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .testimonial h3 {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #d60f30;
+            margin-top: 15px;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background-color: #ffffff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .gallery h2 {
+            font-size: 2.5rem;
+            color: #2d2d2d;
+            margin-bottom: 30px;
+        }
+
+        .gallery-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .gallery-image {
+            width: 250px;
+            height: 250px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f5f5f5;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #d60f30;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #e0e0e0;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            background-color: #c0c0c0;
+            outline: none;
+        }
+
+        .contact-form button {
+            background-color: #2d2d2d;
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #2d2d2d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>CraveBite</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Discover the Best Flavors</h2>
+        <p>Experience the finest dining at our restaurant. Your table is waiting!</p>
+        <a href="menu.html" class="cta-button">Menu</a>
+        <a href="#contact" class="cta-button">Reserve Your Table</a>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <h2>Our Specialities</h2>
+        <div class="menu-items">
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/236x/c3/82/53/c3825394eb2358a2b708810eb668a0c7.jpg" alt="Dish 1">
+                <h3>Grilled Chicken</h3>
+                <p>A delicious grilled chicken with savory seasoning.</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/236x/46/5d/f4/465df43334839b48eaf933f14f9f4e4a.jpg" alt="Dish 2">
+                <h3>Cheese Pizza</h3>
+                <p>Classic pizza topped with mozzarella cheese and fresh ingredients.</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/736x/8c/24/3c/8c243cc8e49925b96f1cac71cd39de6d.jpg" alt="Dish 3">
+                <h3>Vegan Salad</h3>
+                <p>A healthy and tasty mix of seasonal vegetables.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <h2>Our Gallery</h2>
+        <div class="gallery-images">
+            <div class="gallery-image">
+                <img src="https://i.pinimg.com/236x/94/bb/02/94bb027f0b208df713239e81bc94878c.jpg" alt="Gallery Image 1">
+            </div>
+            <div class="gallery-image">
+                <img src="https://i.pinimg.com/236x/89/66/41/8966411577b8a2f41aaa2d6c97b1c351.jpg" alt="Gallery Image 2">
+            </div>
+            <div class="gallery-image">
+                <img src="https://i.pinimg.com/474x/2e/cd/31/2ecd31dfc71774c17089bc56fca797b5.jpg" alt="Gallery Image 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Delicious Restaurant. All rights reserved.</p>
+    </footer>
+</body>
+</html>
